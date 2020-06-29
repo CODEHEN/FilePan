@@ -43,7 +43,7 @@
             , cols:
                 [
                     [ //表头
-                        {field: 'key', title: '文件名', templet: '#Type', align: 'left', width: 1000, style: 'cursor: pointer'}
+                        {field: 'key', title: '文件名', templet: '#Type', align: 'left', width: '65%', style: 'cursor: pointer'}
                         , {field: 'lastModified', title: '修改时间', align: 'center', templet: '#Time'}
                         , {field: 'size', title: '大小', toolbar: '#Tsize', align: 'center'}
                         , {field: '操作', title: '操作', templet: '#barDemo', align: 'center'}
@@ -54,7 +54,6 @@
 
         table.on('tool(test)', function (obj) {
             var data = obj.data;
-            console.log(dir)
             if (obj.event === 'download') {
                 window.location.href = "/FilePan/file/download?path="+dir+obj.data.key
             } else if (obj.event === 'delete') {
@@ -79,11 +78,22 @@
                     done() {
                         dir = data;  // 此处dir是全局变量
                         console.log(dir);
+                        var a = '<a href="javascript:;" class="navigation"><cite>'+ ' > '+obj.data.key+'</cite></a>'
+                        $(".layui-breadcrumb").append(a)
+
+                        $(document).off("click").on("click", "#navigation" ,function() {
+                            alert(data.toString());
+                        });
                     }
                 });
             }
             //标注选中样式
             obj.tr.addClass('layui-table-click').siblings().removeClass('layui-table-click');
+
+
+
+
+
         });
 
 

@@ -1,17 +1,11 @@
 package com.chenlh.controller;
 
-import com.aliyun.oss.model.OSSObject;
 import com.chenlh.service.FileService;
 import com.chenlh.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

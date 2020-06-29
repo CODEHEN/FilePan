@@ -112,7 +112,7 @@ public class FileServiceImpl implements FileService {
 
         HashMap<String,InputStream> map = new HashMap<>();
 
-        map.put(ossObject.getKey(),ossObject.getObjectContent());
+        map.put(ossObject.getKey().substring(ossObject.getKey().lastIndexOf("/")+1),ossObject.getObjectContent());
 
         return map;
     }
