@@ -69,20 +69,20 @@
         table.on('row(test)', function (obj) {
             if (obj.data.type) {
                 var data = obj.data.prefix;
-                console.log(data)
                 table.reload('indexFile', {   // 重新渲染
                     url: '/FilePan/file/Dir',
                     where: { //设定异步数据接口的额外参数，任意设
                         dir: data
                     },
                     done() {
-                        dir = data;  // 此处dir是全局变量
-                        console.log(dir);
-                        var a = '<a href="javascript:;" class="navigation"><cite>'+ ' > '+obj.data.key+'</cite></a>'
+                        dir = data
+                        id = data.substring(0,data.length-1).replace("/","");
+                        var a = '<a href="javascript:;" id="'+id+'"><cite>'+ ' > '+obj.data.key+'</cite></a>'
                         $(".layui-breadcrumb").append(a)
-
-                        $(document).off("click").on("click", "#navigation" ,function() {
-                            alert(data.toString());
+                        var element = "#"+id
+                        $(element).on("click" ,function() {
+                            $(element).next().remove();
+                            tableReload(data)
                         });
                     }
                 });
@@ -90,6 +90,17 @@
             //标注选中样式
             obj.tr.addClass('layui-table-click').siblings().removeClass('layui-table-click');
 
+            function tableReload(dir) {
+                table.reload('indexFile', {
+                    url: '/FilePan/file/Dir',
+                    where: {
+                        dir: dir
+                    },
+                    done() {
+                        return
+                    }
+                })
+            }
 
 
 
