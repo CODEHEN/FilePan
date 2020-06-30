@@ -46,7 +46,7 @@ public class FileServiceImpl implements FileService {
 
         ObjectListing listing = oss.listObjects(listObjectsRequest);
 
-        List<Object> file = new ArrayList<>(listing.getObjectSummaries());
+        List<Object> file = new ArrayList<Object>(listing.getObjectSummaries());
 
         for (String commonPrefix : listing.getCommonPrefixes()) {
             File file1 = new File();
@@ -78,7 +78,7 @@ public class FileServiceImpl implements FileService {
         // 删除文件的前缀
         List<OSSObjectSummary> objectSummaries = new DeletePrefix().deletePrefix(listing.getObjectSummaries(),dir);
 
-        List<Object> file = new ArrayList<>(objectSummaries);
+        List<Object> file = new ArrayList<Object>(objectSummaries);
 
         for (String commonPrefix : listing.getCommonPrefixes()) {
             File file1 = new File();

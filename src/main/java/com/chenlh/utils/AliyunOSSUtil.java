@@ -17,11 +17,11 @@ import org.springframework.stereotype.Component;
  * @Date: Create in 10:32 2020/6/18
  */
 public class AliyunOSSUtil {
-    private String OSS_END_POINT = "http://oss-cn-beijing.aliyuncs.com";
+    private String OSS_END_POINT = "xxxxx";
 
-    private String OSS_ACCESS_KEY_ID = "LTAI4GCY4UnzniVrDovGkYSr";
+    private String OSS_ACCESS_KEY_ID = "xxxxxx";
 
-    private String OSS_ACCESS_KEY_SECRET = "XWeZZKcJGFIIP8h5pBDtmyznK3ePGC";
+    private String OSS_ACCESS_KEY_SECRET = "xxxxxx";
 
     private String OSS_BUCKET_NAME = "alohomora";
 
