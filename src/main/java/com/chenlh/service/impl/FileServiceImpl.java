@@ -12,6 +12,8 @@ import com.chenlh.vo.File;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.*;
 
@@ -115,6 +117,13 @@ public class FileServiceImpl implements FileService {
         map.put(ossObject.getKey().substring(ossObject.getKey().lastIndexOf("/")+1),ossObject.getObjectContent());
 
         return map;
+    }
+
+    @Override
+    public Boolean uploadFile(String pathAndName) throws FileNotFoundException {
+        OSS oss = new AliyunOSSUtil().OssClient();
+        InputStream inputStream = new FileInputStream("<yourlocalFile>");
+        return null;
     }
 
 

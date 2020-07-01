@@ -12,7 +12,6 @@
     <span class="layui-breadcrumb" style="visibility: visible" lay-separator="—">
         <a href="/FilePan/index"><cite>首页</cite></a>
     </span>
-
 </div>
 
 <div class="description">
@@ -24,6 +23,10 @@
 <div class="table">
     <table id="indexFile" lay-filter="test"></table>
 </div>
+
+<button type="button" class="layui-btn" id="test3">
+    <i class="layui-icon"></i>上传文件
+</button>
 
 
 <script src="../static/layui/layui.js"></script>
@@ -101,14 +104,36 @@
                     }
                 })
             }
-
-
-
-
         });
+    });
+</script>
 
+<script>
+    layui.use('upload', function(){
+        var upload = layui.upload;
+        //执行实例
+        var uploadInst = upload.render({
+            elem: '#test3' //绑定元素
+            ,url: '/FilePan/file/upload' //上传接口
+            ,accept: 'file'
+            ,data: {
+                path: path
+            }
+            ,before: function(obj){ //obj参数包含的信息，跟 choose回调完全一致，可参见上文。
+                this.path = dir
+                console.log(path)
+                layer.load(); //上传loading
+            }
+            ,done: function(res){
+                //上传完毕回调
+                layer.closeAll('loading'); //关闭loading
+                console.log(dir)
 
-
+            }
+            ,error: function(){
+                //请求异常回调
+            }
+        });
     });
 </script>
 

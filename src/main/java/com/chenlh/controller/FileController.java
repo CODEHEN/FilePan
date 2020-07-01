@@ -4,6 +4,8 @@ import com.chenlh.service.FileService;
 import com.chenlh.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.List;
@@ -76,4 +78,11 @@ public class FileController {
         }
         return Result.createByNull("success");
     }
+
+    @RequestMapping(value = "/upload",method = RequestMethod.POST)
+    public Result<String> uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
+        InputStream inputStream = file.getInputStream();
+        return Result.createByNull("sucess");
+    }
+
 }
