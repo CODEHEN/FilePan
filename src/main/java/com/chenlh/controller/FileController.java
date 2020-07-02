@@ -80,9 +80,24 @@ public class FileController {
     }
 
     @RequestMapping(value = "/upload",method = RequestMethod.POST)
-    public Result<String> uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
-        InputStream inputStream = file.getInputStream();
-        return Result.createByNull("sucess");
+    public Result<String> uploadFile(@RequestParam("file") MultipartFile file,@RequestParam("path") String path) throws IOException {
+        Boolean flag = fileService.uploadFile(path,file);
+        if (flag == true) {
+            return Result.createBySuccess(200,"sucess");
+        }else {
+            return Result.createByNull(500,"error");
+        }
+
+    }
+
+    @RequestMapping("/delete")
+    public Result<String> deleteFile(@RequestParam("file") String file) {
+        Boolean flag = fileService.deleteFile(file);
+        if (flag == true) {
+            return Result.createBySuccess(200,"sucess");
+        }else {
+            return Result.createByNull(500,"error");
+        }
     }
 
 }

@@ -1,19 +1,18 @@
 package com.chenlh.service.impl;
 
 import com.aliyun.oss.OSS;
-import com.aliyun.oss.model.ListObjectsRequest;
-import com.aliyun.oss.model.OSSObject;
-import com.aliyun.oss.model.OSSObjectSummary;
-import com.aliyun.oss.model.ObjectListing;
+import com.aliyun.oss.model.*;
 import com.chenlh.service.FileService;
 import com.chenlh.utils.AliyunOSSUtil;
 import com.chenlh.utils.DeletePrefix;
 import com.chenlh.vo.File;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 
@@ -120,10 +119,31 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public Boolean uploadFile(String pathAndName) throws FileNotFoundException {
+    public Boolean uploadFile(String path, MultipartFile file) throws IOException {
         OSS oss = new AliyunOSSUtil().OssClient();
-        InputStream inputStream = new FileInputStream("<yourlocalFile>");
-        return null;
+
+        InputStream inputStream = file.getInputStream();
+        PutObjectResult putObjectResult = oss.putObject(BUCKET_NAME, path + file.getOriginalFilename(), inputStream);
+
+        if (putObjectResult != null) {
+            return true;
+        }else {
+            return false;
+        }
+
+    }
+
+    @Override
+    public Boolean deleteFile(String file) {
+        OSS oss = new AliyunOSSUtil().OssClient();
+
+        try{
+            oss.deleteObject(BUCKET_NAME,file);
+        }catch (Exception e) {
+            return false;
+        }
+
+        return true;
     }
 
 
