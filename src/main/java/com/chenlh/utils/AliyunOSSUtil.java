@@ -23,7 +23,7 @@ public class AliyunOSSUtil {
 
     private String OSS_ACCESS_KEY_SECRET = "xxxxx";
 
-    private String OSS_BUCKET_NAME = "xxxxx";
+    private String OSS_BUCKET_NAME = "xxxx";
 
     @Bean
     @Scope("prototype")
